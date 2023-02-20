@@ -9,6 +9,9 @@ namespace Country_EF_WinForms_App.EntityMappings
         public void Configure(EntityTypeBuilder<Country> builder)
         {
             builder.Property(x => x.Name).HasMaxLength(100);
+
+            builder.HasOne(c => c.Capital)
+                .WithOne(c => c.Country);
         }
     }
 }
