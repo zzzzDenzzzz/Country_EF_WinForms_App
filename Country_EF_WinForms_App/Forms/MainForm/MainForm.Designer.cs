@@ -79,6 +79,7 @@
             this.btnDeleteCountry.TabIndex = 3;
             this.btnDeleteCountry.Text = "Удалить";
             this.btnDeleteCountry.UseVisualStyleBackColor = true;
+            this.btnDeleteCountry.Click += new System.EventHandler(this.BtnDeleteCountry_Click);
             // 
             // btnUpdateCountry
             // 

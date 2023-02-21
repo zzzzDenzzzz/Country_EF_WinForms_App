@@ -1,3 +1,5 @@
+using Country_EF_WinForms_App.Constants;
+using Country_EF_WinForms_App.Forms.CountryForms;
 using Country_EF_WinForms_App.Services;
 
 namespace Country_EF_WinForms_App
@@ -36,16 +38,46 @@ namespace Country_EF_WinForms_App
 
         #endregion
 
-        void BtnCreateCountry_Click(object sender, EventArgs e)
-        {
-
-        }
-
         async void LoadCountriesAsync()
         {
             TableCreatorService.ShowTable(
                 gridCountries,
                 TableCreatorService.CreateCountryTable(await _countryService.GetCountriesAsync()));
+        }
+
+        async void BtnCreateCountry_Click(object sender, EventArgs e)
+        {
+            var form = new AddCountryForm();
+            if (form.ShowDialog() == DialogResult.OK )
+            {
+                await _countryService.AddCountryAsync(form.CountryName, form.Area, form.PopulationCountry, form.PartOfTheWorld);
+                LoadCountriesAsync();
+            }
+        }
+
+        async void BtnDeleteCountry_Click(object sender, EventArgs e)
+        {
+            if (gridCountries.SelectedRows.Count > 0)
+            {
+                var countryId = int.Parse(gridCountries.SelectedRows[0].Cells[0].Value.ToString()!);
+                try
+                {
+                    await _countryService.DeleteCountryAsync(countryId);
+                }
+                catch (Exception ex)
+                {
+
+                    MessageBox.Show(ex.Message);
+                }
+                finally
+                {
+                    LoadCountriesAsync();
+                }
+            }
+            else
+            {
+                MessageBox.Show(DefaultDB.OBJECT_TO_DELETE_NOT_FOUND);
+            }
         }
 
         async void LoadCitiesAsync()

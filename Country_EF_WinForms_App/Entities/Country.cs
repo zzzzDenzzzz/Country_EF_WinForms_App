@@ -12,11 +12,7 @@ namespace Country_EF_WinForms_App.Entities
 
         public decimal Population { get; set; }
 
-        public int CapitalId { get; set; }
-
         public PartsOfTheWorld PartOfTheWorld { get; set; }
-
-        public virtual City Capital { get; set; }
 
         public virtual ICollection<City> Cities { get; set; }
     }

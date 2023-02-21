@@ -10,6 +10,8 @@
 
         public int CountryId { get; set; }
 
+        public bool IsCapital { get; set; }
+
         public virtual Country Country { get; set; }
     }
 }
