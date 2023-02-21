@@ -13,7 +13,7 @@ namespace Country_EF_WinForms_App.EntityMappings
 
             builder.HasIndex(e => e.Name).IsUnique();
 
-            builder.Property(e => e.Name).HasMaxLength(DefaultDB.StringValueMaxLength);
+            builder.Property(e => e.Name).HasMaxLength(DefaultDB.STRING_VALUE_MAX_LENGTH);
 
             builder.HasOne(e => e.Country)
                 .WithMany(e => e.Cities)
