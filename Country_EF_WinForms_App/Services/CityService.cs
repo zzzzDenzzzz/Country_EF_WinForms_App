@@ -19,24 +19,26 @@ namespace Country_EF_WinForms_App.Services
             return await _context.Cities.ToListAsync();
         }
 
-        public async Task AddCityAsync(string name, decimal population, int countryId)
+        public async Task AddCityAsync(string name, decimal population, int countryId, bool isCapital)
         {
             var city = new City
             {
                 Name = name,
                 Population = population,
-                CountryId = countryId
+                CountryId = countryId,
+                IsCapital = isCapital
             };
 
             await _context.AddAsync(city);
             await _context.SaveChangesAsync();
         }
 
-        public async Task UpdateCityAsync(City city, string newName, decimal newPopulation, int newCountryId)
+        public async Task UpdateCityAsync(City city, string newName, decimal newPopulation, int newCountryId, bool newIsCapital)
         {
             city.Name = newName;
             city.Population = newPopulation;
             city.CountryId = newCountryId;
+            city.IsCapital = newIsCapital;
             await _context.SaveChangesAsync();
         }
 
