@@ -16,8 +16,8 @@ namespace Country_EF_WinForms_App.Entities
 
         public PartsOfTheWorld PartOfTheWorld { get; set; }
 
-        public virtual City? Capital { get; set; }
+        public virtual City Capital { get; set; }
 
-        public virtual ICollection<City>? Cities { get; set; }
+        public virtual ICollection<City> Cities { get; set; }
     }
 }
