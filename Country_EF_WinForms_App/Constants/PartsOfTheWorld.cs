@@ -5,16 +5,16 @@ namespace Country_EF_WinForms_App.Constants
     public enum PartsOfTheWorld
     {
         [Description("Азия")]
-        Asia = 1,
+        ASIA = 1,
         [Description("Африка")]
-        Africa,
+        AFRICA,
         [Description("Европа")]
-        Europa,
+        EUROPA,
         [Description("Северная Америка")]
-        North_America,
+        NORTH_AMERICA,
         [Description("Южная Америка")]
-        South_America,
+        SOUTH_AMERICA,
         [Description("Австралия")]
-        Australia,
+        AUSTRALIA,
     }
 }

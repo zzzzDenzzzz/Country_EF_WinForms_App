@@ -4,17 +4,19 @@ namespace Country_EF_WinForms_App.Services
 {
     public static class GetEnumDescriptionService
     {
-        public static string GetEnumDescription(this Enum enumValue)
+        public static string GetEnumDescription(this Enum value)
         {
-            var field = enumValue.GetType().GetField(enumValue.ToString());
+            var field = value.GetType().GetField(value.ToString());
             if (field != null)
             {
-                if (Attribute.GetCustomAttribute(field, typeof(DescriptionAttribute)) is DescriptionAttribute attribute)
+                var attributes = (DescriptionAttribute[])field.GetCustomAttributes(typeof(DescriptionAttribute), false);
+                if (attributes != null && attributes.Length > 0)
                 {
-                    return attribute.Description;
+                    return attributes[0].Description;
                 }
             }
-            throw new ArgumentException("Item not found.", nameof(enumValue));
+            
+            return value.ToString();
         }
     }
 }
