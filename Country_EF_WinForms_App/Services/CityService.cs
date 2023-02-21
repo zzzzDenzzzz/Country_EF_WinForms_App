@@ -54,7 +54,7 @@ namespace Country_EF_WinForms_App.Services
             }
             else
             {
-                throw new Exception(DefaultDB.OBJECT_TO_DELETE_NOT_FOUND);
+                throw new Exception(DefaultDB.OBJECT_NOT_FOUND);
             }
         }
 

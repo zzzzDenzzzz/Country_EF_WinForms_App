@@ -19,6 +19,11 @@ namespace Country_EF_WinForms_App.Services
             return await _context.Countries.ToListAsync();
         }
 
+        public async Task<Country?> GetCountryByIdAsync(int id)
+        {
+            return await _context.Countries.FindAsync(id);
+        }
+
         public async Task AddCountryAsync(string name, decimal area, decimal population, PartsOfTheWorld partOfTheWorld)
         {
             var country = new Country
@@ -30,6 +35,15 @@ namespace Country_EF_WinForms_App.Services
             };
 
             await _context.AddAsync(country);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task UpdateCountryAsync(Country country, string newName, decimal newArea, decimal newPopulation, PartsOfTheWorld newPartOfTheWorld)
+        {
+            country.Name = newName;
+            country.Area = newArea;
+            country.Population = newPopulation;
+            country.PartOfTheWorld = newPartOfTheWorld;
             await _context.SaveChangesAsync();
         }
 
@@ -48,7 +62,7 @@ namespace Country_EF_WinForms_App.Services
             }
             else
             {
-                throw new Exception(DefaultDB.OBJECT_TO_DELETE_NOT_FOUND);
+                throw new Exception(DefaultDB.OBJECT_NOT_FOUND);
             }
         }
     }

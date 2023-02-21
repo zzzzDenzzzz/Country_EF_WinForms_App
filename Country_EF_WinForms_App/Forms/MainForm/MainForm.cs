@@ -1,4 +1,4 @@
-using Country_EF_WinForms_App.Constants;
+﻿using Country_EF_WinForms_App.Constants;
 using Country_EF_WinForms_App.Forms.CountryForms;
 using Country_EF_WinForms_App.Services;
 
@@ -38,6 +38,8 @@ namespace Country_EF_WinForms_App
 
         #endregion
 
+        #region [CRUD Countries]
+
         async void LoadCountriesAsync()
         {
             TableCreatorService.ShowTable(
@@ -52,6 +54,40 @@ namespace Country_EF_WinForms_App
             {
                 await _countryService.AddCountryAsync(form.CountryName, form.Area, form.PopulationCountry, form.PartOfTheWorld);
                 LoadCountriesAsync();
+            }
+        }
+
+        async void BtnUpdateCountry_Click(object sender, EventArgs e)
+        {
+            if (gridCountries.SelectedRows.Count > 0)
+            {
+                var countryId = int.Parse(gridCountries.SelectedRows[0].Cells[0].Value.ToString()!);
+                var country = await _countryService.GetCountryByIdAsync(countryId);
+
+                if (country == null)
+                {
+                    MessageBox.Show(DefaultDB.OBJECT_NOT_FOUND);
+                    LoadCountriesAsync();
+                    return;
+                }
+
+                try
+                {
+                    var form = new UpdateCountryForm(country.Name, country.Area, country.Population, country.PartOfTheWorld);
+                    if (form.ShowDialog() == DialogResult.OK)
+                    {
+                        await _countryService.UpdateCountryAsync(country, form.CountryName, form.Area, form.PopulationCountry, form.PartOfTheWorld);
+                    }
+                }
+                catch (Exception ex)
+                {
+
+                    MessageBox.Show(ex.Message);
+                }
+                finally
+                {
+                    LoadCountriesAsync();
+                }
             }
         }
 
@@ -76,9 +112,13 @@ namespace Country_EF_WinForms_App
             }
             else
             {
-                MessageBox.Show(DefaultDB.OBJECT_TO_DELETE_NOT_FOUND);
+                MessageBox.Show(DefaultDB.OBJECT_NOT_FOUND);
             }
         }
+
+        #endregion
+
+        #region [CRUD Cities]
 
         async void LoadCitiesAsync()
         {
@@ -86,5 +126,8 @@ namespace Country_EF_WinForms_App
                 gridCities,
                 TableCreatorService.CreateCityTable(await _cityService.GetCitiesAsync()));
         }
+
+        #endregion
+
     }
 }
