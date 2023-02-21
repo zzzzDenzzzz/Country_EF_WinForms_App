@@ -1,3 +1,6 @@
+using Country_EF_WinForms_App.Contexts;
+using Microsoft.EntityFrameworkCore;
+
 namespace Country_EF_WinForms_App
 {
     internal static class Program
@@ -8,8 +11,8 @@ namespace Country_EF_WinForms_App
         [STAThread]
         static void Main()
         {
-            // To customize application configuration such as set high DPI settings or default font,
-            // see https://aka.ms/applicationconfiguration.
+            var context = new CountryContext();
+            context.Database.Migrate();
             ApplicationConfiguration.Initialize();
             Application.Run(new MainForm());
         }

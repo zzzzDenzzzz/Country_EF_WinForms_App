@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel;
 
-namespace Country_EF_WinForms_App.Services.GetEnumDescriptionService
+namespace Country_EF_WinForms_App.Services
 {
-    public static class Description
+    public static class GetEnumDescriptionService
     {
         public static string GetEnumDescription(this Enum enumValue)
         {
