@@ -1,4 +1,5 @@
 ﻿using Country_EF_WinForms_App.Constants;
+using Country_EF_WinForms_App.Forms.CityForms;
 using Country_EF_WinForms_App.Forms.CountryForms;
 using Country_EF_WinForms_App.Services;
 
@@ -127,7 +128,42 @@ namespace Country_EF_WinForms_App
                 TableCreatorService.CreateCityTable(await _cityService.GetCitiesAsync()));
         }
 
-        #endregion
+        async void BtnCreateCity_Click(object sender, EventArgs e)
+        {
+            var pairs = await _cityService.GetCountriesPairsAsync();
+            var form = new AddCityForm(pairs);
+            if (form.ShowDialog() == DialogResult.OK)
+            {
+                await _cityService.AddCityAsync(form.CityName, form.CityPopulation, form.CountryId, form.IsCapital);
+                LoadCitiesAsync();
+            }
+        }
 
+        async void BtnDeleteCity_Click(object sender, EventArgs e)
+        {
+            if (gridCities.SelectedRows.Count > 0)
+            {
+                var cityId = int.Parse(gridCities.SelectedRows[0].Cells[0].Value.ToString()!);
+                try
+                {
+                    await _cityService.DeleteCityAsync(cityId);
+                }
+                catch (Exception ex)
+                {
+
+                    MessageBox.Show(ex.Message);
+                }
+                finally
+                {
+                    LoadCitiesAsync();
+                }
+            }
+            else
+            {
+                MessageBox.Show(DefaultDB.OBJECT_NOT_FOUND);
+            }
+        }
+
+        #endregion
     }
 }

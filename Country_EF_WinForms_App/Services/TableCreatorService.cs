@@ -43,7 +43,7 @@ namespace Country_EF_WinForms_App.Services
                 row[0] = city.Id;
                 row[1] = city.Name;
                 row[2] = city.Population;
-                row[3] = city.Country.Name;
+                row[3] = city.Country.Name.ToString();
                 table.Rows.Add(row);
             }
             return table;

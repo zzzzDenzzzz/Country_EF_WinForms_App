@@ -47,10 +47,6 @@ namespace Country_EF_WinForms_App.Services
             var city = await _context.Cities.FindAsync(id);
             if (city != null)
             {
-                if (city.Country != null)
-                {
-                    throw new Exception(DefaultDB.DELETION_IS_NOT_POSSIBLE);
-                }
                 _context.Cities.Remove(city);
                 await _context.SaveChangesAsync();
             }
@@ -60,9 +56,9 @@ namespace Country_EF_WinForms_App.Services
             }
         }
 
-        public async Task<List<KeyValuePair<string, int>>> GetCityPairsAsync()
+        public async Task<List<KeyValuePair<string, int>>> GetCountriesPairsAsync()
         {
-            return await _context.Cities
+            return await _context.Countries
                 .Select(x => new KeyValuePair<string, int>(x.Name, x.Id))
                 .ToListAsync();
         }

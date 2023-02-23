@@ -80,12 +80,12 @@ namespace Country_EF_WinForms_App.Forms.CountryForms
         {
             if (numericPopulationCountry.Value <= 0)
             {
-                errorArea.SetError(numericPopulationCountry, DefaultDB.VALUE_IS_NULL);
+                errorPopulation.SetError(numericPopulationCountry, DefaultDB.VALUE_IS_NULL);
                 e.Cancel = true;
             }
             else
             {
-                errorArea.SetError(numericPopulationCountry, string.Empty);
+                errorPopulation.SetError(numericPopulationCountry, string.Empty);
                 e.Cancel = false;
             }
         }
