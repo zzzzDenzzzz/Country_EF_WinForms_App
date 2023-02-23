@@ -24,7 +24,7 @@ namespace Country_EF_WinForms_App.Contexts
         {
             optionsBuilder
                 .UseLazyLoadingProxies()
-                .UseSqlServer(ConfigurationManager.ConnectionStrings["ConnectionJob"].ConnectionString);
+                .UseSqlServer(ConfigurationManager.ConnectionStrings["ConnectionHome"].ConnectionString);
                     
         }
 
