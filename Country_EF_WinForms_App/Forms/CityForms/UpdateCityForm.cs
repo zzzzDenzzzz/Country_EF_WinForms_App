@@ -3,7 +3,7 @@ using System.ComponentModel;
 
 namespace Country_EF_WinForms_App.Forms.CityForms
 {
-    public partial class AddCityForm : Form
+    public partial class UpdateCityForm : Form
     {
         public string CityName => txtName.Text.Trim();
 
@@ -11,15 +11,39 @@ namespace Country_EF_WinForms_App.Forms.CityForms
 
         public int CountryId => (int)comboBoxCountry.SelectedValue!;
 
-        public bool IsCapital => ValueRadioButton();
-
-        public AddCityForm(List<KeyValuePair<string, int>> countries)
+        public bool IsCapital
         {
-            InitializeComponent();
-            PopulateComboBox(countries);
+            get
+            {
+                if (radioBtnNo.Checked)
+                {
+                    return false;
+                }
+                return true;
+            }
+            set
+            {
+                if (value == true)
+                {
+                    radioBtnYes.Checked = true;
+                }
+                else
+                {
+                    radioBtnNo.Checked = true;
+                }
+            }
         }
 
-        void PopulateComboBox(List<KeyValuePair<string, int>> countries)
+        public UpdateCityForm(List<KeyValuePair<string, int>> countries, string name, decimal population, bool isCapital, int countryId)
+        {
+            InitializeComponent();
+            txtName.Text = name;
+            numericPopulation.Value = population;
+            IsCapital = isCapital;
+            PopulateComboBox(countries, countryId);
+        }
+
+        void PopulateComboBox(List<KeyValuePair<string, int>> countries, int countryId = 0)
         {
             var pairs = new List<KeyValuePair<string, int>>
             {
@@ -30,18 +54,10 @@ namespace Country_EF_WinForms_App.Forms.CityForms
             comboBoxCountry.DisplayMember = "Key";
             comboBoxCountry.ValueMember = "Value";
             comboBoxCountry.DataSource = pairs;
+            comboBoxCountry.SelectedItem = pairs.First(x => x.Value == countryId);
         }
 
-        bool ValueRadioButton()
-        {
-            if (radioBtnYes.Checked == true)
-            {
-                return true;
-            }
-            return false;
-        }
-
-        void BtnAdd_Click(object sender, EventArgs e)
+        void BtnUpdate_Click(object sender, EventArgs e)
         {
             if (ValidateChildren())
             {

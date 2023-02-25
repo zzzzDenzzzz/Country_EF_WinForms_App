@@ -139,6 +139,40 @@ namespace Country_EF_WinForms_App
             }
         }
 
+        async void BtnUpdateCity_Click(object sender, EventArgs e)
+        {
+            if (gridCities.SelectedRows.Count > 0)
+            {
+                var cityId = int.Parse(gridCities.SelectedRows[0].Cells[0].Value.ToString()!);
+                var city = await _cityService.GetCityByIdAsync(cityId);
+                if (city == null)
+                {
+                    MessageBox.Show(DefaultDB.OBJECT_NOT_FOUND);
+                    LoadCitiesAsync();
+                    return;
+                }
+
+                try
+                {
+                    var pairs = await _cityService.GetCountryPairsAsync();
+                    var form = new UpdateCityForm(pairs, city.Name, city.Population, city.IsCapital, city.CountryId);
+                    if (form.ShowDialog() == DialogResult.OK)
+                    {
+                        await _cityService.UpdateCityAsync(city, form.CityName, form.CityPopulation, form.CountryId, form.IsCapital);
+                    }
+                }
+                catch (Exception ex)
+                {
+
+                    MessageBox.Show(ex.Message);
+                }
+                finally
+                {
+                    LoadCitiesAsync();
+                }
+            }
+        }
+
         async void BtnDeleteCity_Click(object sender, EventArgs e)
         {
             if (gridCities.SelectedRows.Count > 0)
