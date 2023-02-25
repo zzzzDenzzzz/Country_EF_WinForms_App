@@ -1,5 +1,6 @@
 ﻿using Country_EF_WinForms_App.Constants;
 using Country_EF_WinForms_App.Contexts;
+using Country_EF_WinForms_App.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace Country_EF_WinForms_App.Services
@@ -14,48 +15,120 @@ namespace Country_EF_WinForms_App.Services
         }
 
         // отобразить названия столиц
-        public async Task<List<string>> GetCapital()
+        public async Task<List<City>> GetCapital()
         {
             return await _context.Cities
                 .Where(c => c.IsCapital == true)
-                .Select(c => c.Name)
                 .ToListAsync();
         }
 
-        // отобразить названия крупных городов конкрктной страны
-        public async Task<List<string>> GetCitySetCountry(int countryId)
+        // отобразить названия крупных городов конкретной страны
+        public async Task<List<City>> GetCitySetCountry(int countryId)
         {
-            return await _context.Countries
-                .Where(c => c.Id == countryId)
-                .Select(c => c.Name)
+            return await _context.Cities
+                .Where(c => c.CountryId == countryId)
                 .ToListAsync();
         }
 
         // отобразить название столиц с количеством жителей больше 5 млн.
-        public async Task<List<string>> GetCapitalSetPopulation(decimal population = 5000000)
+        public async Task<List<City>> GetCapitalSetPopulation(decimal population = 5000000)
         {
             return await _context.Cities
                 .Where(c => c.IsCapital == true && c.Population > population)
-                .Select(c => c.Name)
                 .ToListAsync();
         }
 
         // отобразить названия всех европейских стран
-        public async Task<List<string>> GetEuropianCountries()
+        public async Task<List<Country>> GetEuropianCountries()
         {
             return await _context.Countries
                 .Where(c => c.PartOfTheWorld == PartsOfTheWorld.EUROPA)
-                .Select(c => c.Name)
                 .ToListAsync();
         }
 
         // отобразить названия стран c площадью большей конкретного числа
-        public async Task<List<string>> GetCountriesSetArea(decimal area)
+        public async Task<List<Country>> GetCountriesSetArea(decimal area)
         {
             return await _context.Countries
                 .Where(c => c.Area > area)
-                .Select(c => c.Name)
                 .ToListAsync();
+        }
+
+        // отобразить все столицы, у которых в названии есть буквы а, р
+        public async Task<List<City>> GetCapitalContainsLetter(char a = 'а', char r = 'р')
+        {
+            return await _context.Cities
+                .Where(c => c.IsCapital == true && c.Name.Contains(a) && c.Name.Contains(r))
+                .ToListAsync();
+        }
+
+        // отобразить все столицы, у которых в название начинается с буквы к
+        public async Task<List<City>> GetCapitalStartWithLetter(char k = 'к')
+        {
+            return await _context.Cities
+                .Where(c => c.IsCapital == true && c.Name.StartsWith(k))
+                .ToListAsync();
+        }
+
+        // отобразить название стран, у которых площадь находится в указанном диапазоне
+        public async Task<List<Country>> GetCountriesSetArea(decimal areaMin, decimal areaMax)
+        {
+            return await _context.Countries
+                .Where(c => c.Area >= areaMin && c.Area <= areaMax)
+                .ToListAsync();
+        }
+
+        // отобразить название стран, у которых количество жителей больше указанного числа
+        public async Task<List<Country>> GetCountrySetPopulation(decimal population)
+        {
+            return await _context.Countries
+                .Where(c => c.Population > population)
+                .ToListAsync();
+        }
+
+        // показать топ-5 стран по площади
+        public async Task<List<Country>> GetCountryTopArea(int top = 5)
+        {
+            return await _context.Countries
+                .OrderByDescending(c => c.Area)
+                .Take(top)
+                .ToListAsync();
+        }
+
+        // показать топ-5 столиц по количеству жителей
+        public async Task<List<City>> GetCapitalTopPopulation(int top = 5)
+        {
+            return await _context.Cities
+                .Where(c => c.IsCapital == true)
+                .OrderByDescending(c => c.Population)
+                .Take(top)
+                .ToListAsync();
+        }
+
+        // показать страну с самой большой площадью
+        public async Task<Country> GetCountryLargestArea()
+        {
+            return await _context.Countries
+                .OrderByDescending(c => c.Area)
+                .FirstAsync();
+        }
+
+        // показать столицу с самым большим количеством жителей
+        public async Task<City> GetCapitalLargestPopulation()
+        {
+            return await _context.Cities
+                .Where(c => c.IsCapital == true)
+                .OrderByDescending(c => c.Population)
+                .FirstAsync();
+        }
+
+        // показать страну с самой маленькой площадью в Европе
+        public async Task<Country> GetCountrySmallestAreaEuropa()
+        {
+            return await _context.Countries
+                .Where(c => c.PartOfTheWorld == PartsOfTheWorld.EUROPA)
+                .OrderBy(c => c.Area)
+                .FirstAsync();
         }
     }
 }
