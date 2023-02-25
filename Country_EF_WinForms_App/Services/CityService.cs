@@ -28,7 +28,7 @@ namespace Country_EF_WinForms_App.Services
 
         public async Task<List<City>> GetCitiesAsync()
         {
-            return await _context.Cities.ToListAsync();
+            return await _context.Cities.Include(c => c.Country).ToListAsync();
         }
 
         public async Task AddCityAsync(string name, decimal population, int countryId, bool isCapital)
