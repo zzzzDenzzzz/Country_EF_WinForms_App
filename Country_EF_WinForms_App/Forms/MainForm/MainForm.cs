@@ -130,7 +130,7 @@ namespace Country_EF_WinForms_App
 
         async void BtnCreateCity_Click(object sender, EventArgs e)
         {
-            var pairs = await _cityService.GetCountriesPairsAsync();
+            var pairs = await _cityService.GetCountryPairsAsync();
             var form = new AddCityForm(pairs);
             if (form.ShowDialog() == DialogResult.OK)
             {

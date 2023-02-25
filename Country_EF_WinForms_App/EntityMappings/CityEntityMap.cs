@@ -18,7 +18,7 @@ namespace Country_EF_WinForms_App.EntityMappings
             builder.HasOne(e => e.Country)
                 .WithMany(e => e.Cities)
                 .HasForeignKey(e => e.CountryId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.ClientSetNull);
         }
     }
 }

@@ -14,6 +14,18 @@ namespace Country_EF_WinForms_App.Services
             _context = new();
         }
 
+        public async Task<List<KeyValuePair<string, int>>> GetCountryPairsAsync()
+        {
+            return await _context.Countries
+                .Select(x => new KeyValuePair<string, int>(x.Name, x.Id))
+                .ToListAsync();
+        }
+
+        public async Task<City?> GetCityByIdAsync(int id)
+        {
+            return await _context.Cities.FindAsync(id);
+        }
+
         public async Task<List<City>> GetCitiesAsync()
         {
             return await _context.Cities.ToListAsync();
@@ -54,18 +66,6 @@ namespace Country_EF_WinForms_App.Services
             {
                 throw new Exception(DefaultDB.OBJECT_NOT_FOUND);
             }
-        }
-
-        public async Task<List<KeyValuePair<string, int>>> GetCountriesPairsAsync()
-        {
-            return await _context.Countries
-                .Select(x => new KeyValuePair<string, int>(x.Name, x.Id))
-                .ToListAsync();
-        }
-
-        public async Task<City?> GetCityByIdAsync(int id)
-        {
-            return await _context.Cities.FindAsync(id);
         }
     }
 }

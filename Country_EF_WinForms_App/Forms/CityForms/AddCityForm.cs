@@ -1,13 +1,5 @@
 ﻿using Country_EF_WinForms_App.Constants;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace Country_EF_WinForms_App.Forms.CityForms
 {
@@ -27,7 +19,7 @@ namespace Country_EF_WinForms_App.Forms.CityForms
             PopulateComboBox(countries);
         }
 
-        void PopulateComboBox(List<KeyValuePair<string, int>> countries)
+        void PopulateComboBox(List<KeyValuePair<string, int>> countries, int countryId = 0)
         {
             var pairs = new List<KeyValuePair<string, int>>
             {
@@ -38,6 +30,7 @@ namespace Country_EF_WinForms_App.Forms.CityForms
             comboBoxCountry.DisplayMember = "Key";
             comboBoxCountry.ValueMember = "Value";
             comboBoxCountry.DataSource = pairs;
+            comboBoxCountry.SelectedItem = pairs.First(x => x.Value == countryId);
         }
 
         bool ValueRadioButton()
