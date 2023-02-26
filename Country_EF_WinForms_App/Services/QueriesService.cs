@@ -130,5 +130,40 @@ namespace Country_EF_WinForms_App.Services
                 .OrderBy(c => c.Area)
                 .FirstAsync();
         }
+
+        // показать среднюю площадь стран в Европе
+        public async Task<decimal> GetAvgAreaEuropa()
+        {
+            return await _context.Countries
+                .Where(c => c.PartOfTheWorld == PartsOfTheWorld.EUROPA)
+                .AverageAsync(c => c.Area);
+        }
+
+        // показать топ-3 городов по количеству жителей для конкретной страны
+        public async Task<List<City>> GetCitiesTopPopulation(int countryId, int top = 3)
+        {
+            return await _context.Cities
+                .Where(c => c.CountryId == countryId)
+                .OrderByDescending(c => c.Population)
+                .Take(top)
+                .ToListAsync();
+        }
+
+        // показать общее количество стран
+        public async Task<int> GetCountCountries()
+        {
+            return await _context.Countries
+                .CountAsync();
+        }
+
+        // показать часть света с максимальным количеством стран
+        public async Task<PartsOfTheWorld> GetPartOfTheWorldWithMaxCountries()
+        {
+            return await _context.Countries
+                .Select(c => c.PartOfTheWorld)
+                .MaxAsync();
+        }
+
+        // показаьть количество стран в каждой части света
     }
 }
