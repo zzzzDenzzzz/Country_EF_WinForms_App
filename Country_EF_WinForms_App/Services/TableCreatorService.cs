@@ -14,6 +14,7 @@ namespace Country_EF_WinForms_App.Services
             table.Columns.Add("Площадь");
             table.Columns.Add("Население");
             table.Columns.Add("Часть света");
+            table.Columns.Add("Столица");
 
             foreach (var country in countries)
             {
@@ -23,6 +24,7 @@ namespace Country_EF_WinForms_App.Services
                 row[2] = country.Area;
                 row[3] = country.Population;
                 row[4] = country.PartOfTheWorld.GetEnumDescription();
+                row[5] = country.Cities.FirstOrDefault(x => x.IsCapital)?.Name;
                 table.Rows.Add(row);
             }
             return table;

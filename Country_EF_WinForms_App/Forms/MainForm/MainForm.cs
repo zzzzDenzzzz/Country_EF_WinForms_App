@@ -1,4 +1,5 @@
 ﻿using Country_EF_WinForms_App.Constants;
+using Country_EF_WinForms_App.Forms;
 using Country_EF_WinForms_App.Forms.CityForms;
 using Country_EF_WinForms_App.Forms.CountryForms;
 using Country_EF_WinForms_App.Services;
@@ -7,33 +8,30 @@ namespace Country_EF_WinForms_App
 {
     public partial class MainForm : Form
     {
-        readonly CountryService _countryService;
+        CountryService _countryService = null!;
 
-        readonly CityService _cityService;
+        CityService _cityService = null!;
 
         readonly Dictionary<int, Action> LoadTabsMethod;
 
         public MainForm()
         {
             InitializeComponent();
-            _countryService = new();
-            _cityService = new();
+            
             LoadTabsMethod = new()
             {
-                {0, LoadCountriesAsync },
-                {1, LoadCitiesAsync },
+                {0, LoadTabPageCountriesAsync },
+                {1, LoadTabPageCitiesAsync },
+                {2, LoadTabPageQueries },
             };
         }
 
-        #region [MainForm_Load, TabControlMain_SelectedIndexChanged]
+        #region [MainForm_Load]
 
         void MainForm_Load(object sender, EventArgs e)
         {
-            LoadTabsMethod[0]();
-        }
-
-        void TabControlMain_SelectedIndexChanged(object sender, EventArgs e)
-        {
+            _countryService = new();
+            _cityService = new();
             LoadTabsMethod[tabControlMain.SelectedIndex]();
         }
 
@@ -41,7 +39,7 @@ namespace Country_EF_WinForms_App
 
         #region [CRUD Countries]
 
-        async void LoadCountriesAsync()
+        async void LoadTabPageCountriesAsync()
         {
             TableCreatorService.ShowTable(
                 gridCountries,
@@ -54,7 +52,7 @@ namespace Country_EF_WinForms_App
             if (form.ShowDialog() == DialogResult.OK )
             {
                 await _countryService.AddCountryAsync(form.CountryName, form.Area, form.PopulationCountry, form.PartOfTheWorld);
-                LoadCountriesAsync();
+                LoadTabPageCountriesAsync();
             }
         }
 
@@ -68,7 +66,7 @@ namespace Country_EF_WinForms_App
                 if (country == null)
                 {
                     MessageBox.Show(DefaultDB.OBJECT_NOT_FOUND);
-                    LoadCountriesAsync();
+                    LoadTabPageCountriesAsync();
                     return;
                 }
 
@@ -87,7 +85,7 @@ namespace Country_EF_WinForms_App
                 }
                 finally
                 {
-                    LoadCountriesAsync();
+                    LoadTabPageCountriesAsync();
                 }
             }
         }
@@ -108,7 +106,7 @@ namespace Country_EF_WinForms_App
                 }
                 finally
                 {
-                    LoadCountriesAsync();
+                    LoadTabPageCountriesAsync();
                 }
             }
             else
@@ -121,7 +119,7 @@ namespace Country_EF_WinForms_App
 
         #region [CRUD Cities]
 
-        async void LoadCitiesAsync()
+        async void LoadTabPageCitiesAsync()
         {
             TableCreatorService.ShowTable(
                 gridCities,
@@ -135,7 +133,7 @@ namespace Country_EF_WinForms_App
             if (form.ShowDialog() == DialogResult.OK)
             {
                 await _cityService.AddCityAsync(form.CityName, form.CityPopulation, form.CountryId, form.IsCapital);
-                LoadCitiesAsync();
+                LoadTabPageCitiesAsync();
             }
         }
 
@@ -148,7 +146,7 @@ namespace Country_EF_WinForms_App
                 if (city == null)
                 {
                     MessageBox.Show(DefaultDB.OBJECT_NOT_FOUND);
-                    LoadCitiesAsync();
+                    LoadTabPageCitiesAsync();
                     return;
                 }
 
@@ -168,7 +166,7 @@ namespace Country_EF_WinForms_App
                 }
                 finally
                 {
-                    LoadCitiesAsync();
+                    LoadTabPageCitiesAsync();
                 }
             }
         }
@@ -189,13 +187,31 @@ namespace Country_EF_WinForms_App
                 }
                 finally
                 {
-                    LoadCitiesAsync();
+                    LoadTabPageCitiesAsync();
                 }
             }
             else
             {
                 MessageBox.Show(DefaultDB.OBJECT_NOT_FOUND);
             }
+        }
+
+        #endregion
+
+        #region [Queries]
+
+        void LoadTabPageQueries()
+        {
+
+        }
+
+        void BtnGetCapital_Click(object sender, EventArgs e)
+        {
+            int key = 0;
+            var form = new QueryForm(key);
+            var s = sender as Button;
+            form.Text = s.Text;
+            form.ShowDialog();
         }
 
         #endregion

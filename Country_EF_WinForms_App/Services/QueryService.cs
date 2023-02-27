@@ -5,17 +5,17 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Country_EF_WinForms_App.Services
 {
-    public class QueriesService
+    public class QueryService
     {
         readonly CountryContext _context;
 
-        public QueriesService()
+        public QueryService()
         {
             _context = new();
         }
 
         // отобразить названия столиц
-        public async Task<List<City>> GetCapital()
+        public async Task<List<City>> GetCapitalAsync()
         {
             return await _context.Cities
                 .Where(c => c.IsCapital == true)
