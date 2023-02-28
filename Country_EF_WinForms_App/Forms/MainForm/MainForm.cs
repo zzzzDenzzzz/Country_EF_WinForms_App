@@ -207,11 +207,27 @@ namespace Country_EF_WinForms_App
 
         void BtnGetCapital_Click(object sender, EventArgs e)
         {
-            int key = 0;
-            var form = new QueryForm(key);
-            var s = sender as Button;
-            form.Text = s.Text;
-            form.ShowDialog();
+            FormHelperService.CreateForm(MethodKeys.GetCapitals, sender);
+        }
+
+        void BtnGetCapitalsSetPopulation_Click(object sender, EventArgs e)
+        {
+            FormHelperService.CreateForm(MethodKeys.GetCapitalsSetPopulation, sender);
+        }
+
+        void BtnGetEuropianCountries_Click(object sender, EventArgs e)
+        {
+            FormHelperService.CreateForm(MethodKeys.GetEuropianCountries, sender);
+        }
+
+        void BtnGetCapitalContainsLetter_Click(object sender, EventArgs e)
+        {
+            FormHelperService.CreateForm(MethodKeys.GetCapitalContainsLetter, sender);
+        }
+
+        void BtnGetCapitalStartWithLetter_Click(object sender, EventArgs e)
+        {
+            FormHelperService.CreateForm(MethodKeys.GetCapitalStartWithLetter, sender);
         }
 
         #endregion

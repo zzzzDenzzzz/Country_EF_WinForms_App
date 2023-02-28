@@ -2,6 +2,8 @@
 using Country_EF_WinForms_App.Contexts;
 using Country_EF_WinForms_App.Entities;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 
 namespace Country_EF_WinForms_App.Services
 {
@@ -15,7 +17,7 @@ namespace Country_EF_WinForms_App.Services
         }
 
         // отобразить названия столиц
-        public async Task<List<City>> GetCapitalAsync()
+        public async Task<List<City>> GetCapitalsAsync()
         {
             return await _context.Cities
                 .Where(c => c.IsCapital == true)
@@ -31,7 +33,7 @@ namespace Country_EF_WinForms_App.Services
         }
 
         // отобразить название столиц с количеством жителей больше 5 млн.
-        public async Task<List<City>> GetCapitalSetPopulation(decimal population = 5000000)
+        public async Task<List<City>> GetCapitalsSetPopulationAsync(decimal population = 5000000)
         {
             return await _context.Cities
                 .Where(c => c.IsCapital == true && c.Population > population)
@@ -39,7 +41,7 @@ namespace Country_EF_WinForms_App.Services
         }
 
         // отобразить названия всех европейских стран
-        public async Task<List<Country>> GetEuropianCountries()
+        public async Task<List<Country>> GetEuropianCountriesAsync()
         {
             return await _context.Countries
                 .Where(c => c.PartOfTheWorld == PartsOfTheWorld.EUROPA)
@@ -55,19 +57,31 @@ namespace Country_EF_WinForms_App.Services
         }
 
         // отобразить все столицы, у которых в названии есть буквы а, р
-        public async Task<List<City>> GetCapitalContainsLetter(char a = 'а', char r = 'р')
+        public async Task<List<City>> GetCapitalContainsLetterAsync(char a = 'а', char r = 'р')
         {
-            return await _context.Cities
-                .Where(c => c.IsCapital == true && c.Name.Contains(a) && c.Name.Contains(r))
+            var city = await _context.Cities
+                .Where(c => c.IsCapital == true)
                 .ToListAsync();
+
+            var cityIsLetter = city
+                .Where(c => c.Name.ToLower().Contains(a) && c.Name.ToLower().Contains(r))
+                .ToList();
+
+            return cityIsLetter;
         }
 
-        // отобразить все столицы, у которых в название начинается с буквы к
-        public async Task<List<City>> GetCapitalStartWithLetter(char k = 'к')
+        // отобразить все столицы, у которых название начинается с буквы к
+        public async Task<List<City>> GetCapitalStartWithLetterAsync(char k = 'к')
         {
-            return await _context.Cities
-                .Where(c => c.IsCapital == true && c.Name.StartsWith(k))
+            var city = await _context.Cities
+                .Where(c => c.IsCapital == true)
                 .ToListAsync();
+
+            var cityIsLetter = city
+                .Where(c => c.Name.ToLower().StartsWith(k))
+                .ToList();
+
+            return cityIsLetter;
         }
 
         // отобразить название стран, у которых площадь находится в указанном диапазоне

@@ -23,7 +23,7 @@ namespace Country_EF_WinForms_App.Contexts
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder
-                .UseSqlServer(ConfigurationManager.ConnectionStrings["ConnectionJob"].ConnectionString)
+                .UseSqlServer(ConfigurationManager.ConnectionStrings["ConnectionHome"].ConnectionString)
                 .UseLazyLoadingProxies();
                     
         }
