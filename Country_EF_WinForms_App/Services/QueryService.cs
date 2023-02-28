@@ -24,14 +24,6 @@ namespace Country_EF_WinForms_App.Services
                 .ToListAsync();
         }
 
-        // отобразить названия крупных городов конкретной страны
-        public async Task<List<City>> GetCitySetCountry(int countryId)
-        {
-            return await _context.Cities
-                .Where(c => c.CountryId == countryId)
-                .ToListAsync();
-        }
-
         // отобразить название столиц с количеством жителей больше 5 млн.
         public async Task<List<City>> GetCapitalsSetPopulationAsync(decimal population = 5000000)
         {
@@ -45,14 +37,6 @@ namespace Country_EF_WinForms_App.Services
         {
             return await _context.Countries
                 .Where(c => c.PartOfTheWorld == PartsOfTheWorld.EUROPA)
-                .ToListAsync();
-        }
-
-        // отобразить названия стран c площадью большей конкретного числа
-        public async Task<List<Country>> GetCountriesSetArea(decimal area)
-        {
-            return await _context.Countries
-                .Where(c => c.Area > area)
                 .ToListAsync();
         }
 
@@ -85,15 +69,20 @@ namespace Country_EF_WinForms_App.Services
         }
 
         // отобразить название стран, у которых площадь находится в указанном диапазоне
-        public async Task<List<Country>> GetCountriesSetArea(decimal areaMin, decimal areaMax)
+        public async Task<List<Country>> GetCountriesSetAreaAsync(decimal areaMin, decimal areaMax)
         {
+            decimal min, max = 0;
+
+            max = (areaMax > areaMin) ? areaMax : areaMin;
+            min = (areaMin < areaMax) ? areaMin : areaMax;
+
             return await _context.Countries
-                .Where(c => c.Area >= areaMin && c.Area <= areaMax)
+                .Where(c => c.Area >= min && c.Area <= max)
                 .ToListAsync();
         }
 
         // отобразить название стран, у которых количество жителей больше указанного числа
-        public async Task<List<Country>> GetCountrySetPopulation(decimal population)
+        public async Task<List<Country>> GetCountrySetPopulationAsync(decimal population)
         {
             return await _context.Countries
                 .Where(c => c.Population > population)
@@ -137,7 +126,7 @@ namespace Country_EF_WinForms_App.Services
         }
 
         // показать страну с самой маленькой площадью в Европе
-        public async Task<Country> GetCountrySmallestAreaEuropa()
+        public async Task<Country> GetCountrySmallestAreaEuropaAsync()
         {
             return await _context.Countries
                 .Where(c => c.PartOfTheWorld == PartsOfTheWorld.EUROPA)

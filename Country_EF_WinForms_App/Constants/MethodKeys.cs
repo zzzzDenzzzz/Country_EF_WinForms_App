@@ -11,5 +11,6 @@
         GetCapitalTopPopulation,
         GetCountryLargestArea,
         GetCapitalLargestPopulation,
+        GetCountrySmallestAreaEuropa,
     }
 }

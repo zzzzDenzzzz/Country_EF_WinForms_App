@@ -24,6 +24,7 @@ namespace Country_EF_WinForms_App.Forms
                 { MethodKeys.GetCapitalTopPopulation, GetCapitalTopPopulation },
                 { MethodKeys.GetCountryLargestArea, GetCountryLargestArea },
                 { MethodKeys.GetCapitalLargestPopulation, GetCapitalLargestPopulation },
+                { MethodKeys.GetCountrySmallestAreaEuropa, GetCountrySmallestAreaEuropa },
             };
             LoadMethod[key]();
         }
@@ -89,6 +90,13 @@ namespace Country_EF_WinForms_App.Forms
             TableCreatorService.ShowTable(
                 gridQuery,
                 TableCreatorService.CreateCityTable(await _queryService.GetCapitalLargestPopulationAsync()));
+        }
+
+        async void GetCountrySmallestAreaEuropa()
+        {
+            TableCreatorService.ShowTable(
+                gridQuery,
+                TableCreatorService.CreateCountryTable(await _queryService.GetCountrySmallestAreaEuropaAsync()));
         }
     }
 }

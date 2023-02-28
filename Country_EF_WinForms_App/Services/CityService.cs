@@ -31,6 +31,17 @@ namespace Country_EF_WinForms_App.Services
             return await _context.Cities.Include(c => c.Country).ToListAsync();
         }
 
+        public async Task<List<City>> GetCitiesAsync(int countryId = 0)
+        {
+            if (countryId != 0)
+            {
+                return await _context.Cities.Include(c => c.Country)
+                    .Where(c => c.CountryId == countryId)
+                    .ToListAsync();
+            }
+            return await _context.Cities.Include(c => c.Country).ToListAsync();
+        }
+
         public async Task AddCityAsync(string name, decimal population, int countryId, bool isCapital)
         {
             var city = new City
@@ -66,6 +77,20 @@ namespace Country_EF_WinForms_App.Services
             {
                 throw new Exception(DefaultDB.OBJECT_NOT_FOUND);
             }
+        }
+
+        public void PopulateComboBox(ComboBox comboBox, List<KeyValuePair<string, int>> countries, int id = 0)
+        {
+            var pairs = new List<KeyValuePair<string, int>>
+            {
+                new("Не выбран", 0)
+            };
+            pairs.AddRange(countries);
+
+            comboBox.DisplayMember = "Key";
+            comboBox.ValueMember = "Value";
+            comboBox.DataSource = pairs;
+            comboBox.SelectedItem = pairs.First(x => x.Value == id);
         }
     }
 }

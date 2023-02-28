@@ -12,12 +12,14 @@ namespace Country_EF_WinForms_App
 
         CityService _cityService = null!;
 
+        QueryService _queryService = null!;
+
         readonly Dictionary<int, Action> LoadTabsMethod;
 
         public MainForm()
         {
             InitializeComponent();
-            
+
             LoadTabsMethod = new()
             {
                 {0, LoadTabPageCountriesAsync },
@@ -32,6 +34,10 @@ namespace Country_EF_WinForms_App
         {
             _countryService = new();
             _cityService = new();
+            _queryService = new();
+            numericMaxArea.Value = 0;
+            numericMinArea.Value = 0;
+            numericMinPopulation.Value = 0;
             LoadTabsMethod[tabControlMain.SelectedIndex]();
         }
 
@@ -124,6 +130,16 @@ namespace Country_EF_WinForms_App
             TableCreatorService.ShowTable(
                 gridCities,
                 TableCreatorService.CreateCityTable(await _cityService.GetCitiesAsync()));
+
+            var pairs = await _cityService.GetCountryPairsAsync();
+            _cityService.PopulateComboBox(comboBoxContries, pairs);
+        }
+
+        async void LoadTabPageCitiesAsync(int countryId)
+        {
+            TableCreatorService.ShowTable(
+                gridCities,
+                TableCreatorService.CreateCityTable(await _cityService.GetCitiesAsync(countryId)));
         }
 
         async void BtnCreateCity_Click(object sender, EventArgs e)
@@ -205,6 +221,33 @@ namespace Country_EF_WinForms_App
 
         }
 
+
+        void ComboBoxContries_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            LoadTabPageCitiesAsync((int)comboBoxContries.SelectedValue!);
+        }
+
+        async void BtnShowArea_Click(object sender, EventArgs e)
+        {
+            if (numericMinArea.Value == numericMaxArea.Value)
+            {
+                LoadTabPageCountriesAsync();
+                return;
+            }
+            TableCreatorService.ShowTable(
+                gridCountries,
+                TableCreatorService.CreateCountryTable(await _queryService
+                .GetCountriesSetAreaAsync(numericMinArea.Value, numericMaxArea.Value)));
+        }
+
+        async void BtnShowPopulation_Click(object sender, EventArgs e)
+        {
+            TableCreatorService.ShowTable(
+                gridCountries,
+                TableCreatorService.CreateCountryTable(await _queryService
+                .GetCountrySetPopulationAsync(numericMinPopulation.Value)));
+        }
+
         void BtnGetCapital_Click(object sender, EventArgs e)
         {
             FormHelperService.CreateForm(MethodKeys.GetCapitals, sender);
@@ -250,6 +293,12 @@ namespace Country_EF_WinForms_App
             FormHelperService.CreateForm(MethodKeys.GetCapitalLargestPopulation, sender);
         }
 
+        void BtnGetCountrySmallestAreaEuropa_Click(object sender, EventArgs e)
+        {
+            FormHelperService.CreateForm(MethodKeys.GetCountrySmallestAreaEuropa, sender);
+        }
+
         #endregion
+
     }
 }
