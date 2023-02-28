@@ -50,6 +50,9 @@
             this.btnCreateCity = new System.Windows.Forms.Button();
             this.gridCities = new System.Windows.Forms.DataGridView();
             this.tabPageQueries = new System.Windows.Forms.TabPage();
+            this.btnGetPartOfTheWorldWithMaxCountries = new System.Windows.Forms.Button();
+            this.btnGetCountCountries = new System.Windows.Forms.Button();
+            this.btnGetAvgAreaEuropa = new System.Windows.Forms.Button();
             this.btnGetCountrySmallestAreaEuropa = new System.Windows.Forms.Button();
             this.btnGetCapitalLargestPopulation = new System.Windows.Forms.Button();
             this.btnGetCountryLargestArea = new System.Windows.Forms.Button();
@@ -60,6 +63,7 @@
             this.btnGetEuropianCountries = new System.Windows.Forms.Button();
             this.btnGetCapitalsSetPopulation = new System.Windows.Forms.Button();
             this.btnGetCapital = new System.Windows.Forms.Button();
+            this.btnGetCountCountriesInPartOfTheWorld = new System.Windows.Forms.Button();
             this.tabControlMain.SuspendLayout();
             this.tabPageCountries.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericMinPopulation)).BeginInit();
@@ -108,7 +112,7 @@
             // btnShowPopulation
             // 
             this.btnShowPopulation.AutoSize = true;
-            this.btnShowPopulation.Location = new System.Drawing.Point(467, 353);
+            this.btnShowPopulation.Location = new System.Drawing.Point(573, 353);
             this.btnShowPopulation.Name = "btnShowPopulation";
             this.btnShowPopulation.Size = new System.Drawing.Size(78, 25);
             this.btnShowPopulation.TabIndex = 11;
@@ -123,7 +127,7 @@
             0,
             0,
             0});
-            this.numericMinPopulation.Location = new System.Drawing.Point(325, 355);
+            this.numericMinPopulation.Location = new System.Drawing.Point(431, 353);
             this.numericMinPopulation.Maximum = new decimal(new int[] {
             1410065408,
             2,
@@ -136,7 +140,7 @@
             // labelMinPopulation
             // 
             this.labelMinPopulation.AutoSize = true;
-            this.labelMinPopulation.Location = new System.Drawing.Point(234, 359);
+            this.labelMinPopulation.Location = new System.Drawing.Point(338, 359);
             this.labelMinPopulation.Name = "labelMinPopulation";
             this.labelMinPopulation.Size = new System.Drawing.Size(87, 13);
             this.labelMinPopulation.TabIndex = 9;
@@ -340,6 +344,10 @@
             // 
             // tabPageQueries
             // 
+            this.tabPageQueries.Controls.Add(this.btnGetCountCountriesInPartOfTheWorld);
+            this.tabPageQueries.Controls.Add(this.btnGetPartOfTheWorldWithMaxCountries);
+            this.tabPageQueries.Controls.Add(this.btnGetCountCountries);
+            this.tabPageQueries.Controls.Add(this.btnGetAvgAreaEuropa);
             this.tabPageQueries.Controls.Add(this.btnGetCountrySmallestAreaEuropa);
             this.tabPageQueries.Controls.Add(this.btnGetCapitalLargestPopulation);
             this.tabPageQueries.Controls.Add(this.btnGetCountryLargestArea);
@@ -356,6 +364,39 @@
             this.tabPageQueries.TabIndex = 2;
             this.tabPageQueries.Text = "Запросы";
             this.tabPageQueries.UseVisualStyleBackColor = true;
+            // 
+            // btnGetPartOfTheWorldWithMaxCountries
+            // 
+            this.btnGetPartOfTheWorldWithMaxCountries.AutoSize = true;
+            this.btnGetPartOfTheWorldWithMaxCountries.Location = new System.Drawing.Point(343, 10);
+            this.btnGetPartOfTheWorldWithMaxCountries.Name = "btnGetPartOfTheWorldWithMaxCountries";
+            this.btnGetPartOfTheWorldWithMaxCountries.Size = new System.Drawing.Size(169, 49);
+            this.btnGetPartOfTheWorldWithMaxCountries.TabIndex = 12;
+            this.btnGetPartOfTheWorldWithMaxCountries.Text = "Показать часть света\r\n с максимальным количеством\r\n стран";
+            this.btnGetPartOfTheWorldWithMaxCountries.UseVisualStyleBackColor = true;
+            this.btnGetPartOfTheWorldWithMaxCountries.Click += new System.EventHandler(this.BtnGetPartOfTheWorldWithMaxCountries_Click);
+            // 
+            // btnGetCountCountries
+            // 
+            this.btnGetCountCountries.AutoSize = true;
+            this.btnGetCountCountries.Location = new System.Drawing.Point(173, 285);
+            this.btnGetCountCountries.Name = "btnGetCountCountries";
+            this.btnGetCountCountries.Size = new System.Drawing.Size(164, 49);
+            this.btnGetCountCountries.TabIndex = 11;
+            this.btnGetCountCountries.Text = "Показать общее\r\n количество стран";
+            this.btnGetCountCountries.UseVisualStyleBackColor = true;
+            this.btnGetCountCountries.Click += new System.EventHandler(this.BtnGetCountCountries_Click);
+            // 
+            // btnGetAvgAreaEuropa
+            // 
+            this.btnGetAvgAreaEuropa.AutoSize = true;
+            this.btnGetAvgAreaEuropa.Location = new System.Drawing.Point(173, 230);
+            this.btnGetAvgAreaEuropa.Name = "btnGetAvgAreaEuropa";
+            this.btnGetAvgAreaEuropa.Size = new System.Drawing.Size(164, 49);
+            this.btnGetAvgAreaEuropa.TabIndex = 10;
+            this.btnGetAvgAreaEuropa.Text = "Показать среднюю\r\n площадь стран \r\nв Европе";
+            this.btnGetAvgAreaEuropa.UseVisualStyleBackColor = true;
+            this.btnGetAvgAreaEuropa.Click += new System.EventHandler(this.BtnGetAvgAreaEuropa_Click);
             // 
             // btnGetCountrySmallestAreaEuropa
             // 
@@ -467,6 +508,17 @@
             this.btnGetCapital.UseVisualStyleBackColor = true;
             this.btnGetCapital.Click += new System.EventHandler(this.BtnGetCapital_Click);
             // 
+            // btnGetCountCountriesInPartOfTheWorld
+            // 
+            this.btnGetCountCountriesInPartOfTheWorld.AutoSize = true;
+            this.btnGetCountCountriesInPartOfTheWorld.Location = new System.Drawing.Point(343, 65);
+            this.btnGetCountCountriesInPartOfTheWorld.Name = "btnGetCountCountriesInPartOfTheWorld";
+            this.btnGetCountCountriesInPartOfTheWorld.Size = new System.Drawing.Size(169, 49);
+            this.btnGetCountCountriesInPartOfTheWorld.TabIndex = 13;
+            this.btnGetCountCountriesInPartOfTheWorld.Text = "Показать количество стран\r\n в каждой части света";
+            this.btnGetCountCountriesInPartOfTheWorld.UseVisualStyleBackColor = true;
+            this.btnGetCountCountriesInPartOfTheWorld.Click += new System.EventHandler(this.BtnGetCountCountriesInPartOfTheWorld_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -525,5 +577,9 @@
         private Button btnShowPopulation;
         private NumericUpDown numericMinPopulation;
         private Label labelMinPopulation;
+        private Button btnGetAvgAreaEuropa;
+        private Button btnGetCountCountries;
+        private Button btnGetPartOfTheWorldWithMaxCountries;
+        private Button btnGetCountCountriesInPartOfTheWorld;
     }
 }

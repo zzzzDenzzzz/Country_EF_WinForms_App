@@ -248,6 +248,38 @@ namespace Country_EF_WinForms_App
                 .GetCountrySetPopulationAsync(numericMinPopulation.Value)));
         }
 
+        async void BtnGetAvgAreaEuropa_Click(object sender, EventArgs e)
+        {
+            var avgArea = await _queryService.GetAvgAreaEuropaAsync();
+            MessageBoxService.Show(avgArea.ToString(), sender);
+        }
+
+        async void BtnGetCountCountries_Click(object sender, EventArgs e)
+        {
+            var count = await _queryService.GetCountCountriesAsync();
+            MessageBoxService.Show(count.ToString(), sender);
+        }
+
+        async void BtnGetPartOfTheWorldWithMaxCountries_Click(object sender, EventArgs e)
+        {
+            var max = await _queryService.GetPartOfTheWorldWithMaxCountriesAsync();
+            MessageBoxService.Show(max.GetEnumDescription(), sender);
+        }
+
+        async void BtnGetCountCountriesInPartOfTheWorld_Click(object sender, EventArgs e)
+        {
+            var count = await _queryService.GetCountCountriesInPartOfTheWorldAsync();
+            if (count != null)
+            {
+                string text = string.Empty;
+                foreach (var item in count)
+                {
+                    text += (item.Item1.GetEnumDescription() + " = " + item.Item2 + Environment.NewLine);
+                }
+                MessageBoxService.Show(text, sender);
+            }
+        }
+
         void BtnGetCapital_Click(object sender, EventArgs e)
         {
             FormHelperService.CreateForm(MethodKeys.GetCapitals, sender);

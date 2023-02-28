@@ -135,38 +135,40 @@ namespace Country_EF_WinForms_App.Services
         }
 
         // показать среднюю площадь стран в Европе
-        public async Task<decimal> GetAvgAreaEuropa()
+        public async Task<decimal> GetAvgAreaEuropaAsync()
         {
             return await _context.Countries
                 .Where(c => c.PartOfTheWorld == PartsOfTheWorld.EUROPA)
                 .AverageAsync(c => c.Area);
         }
 
-        // показать топ-3 городов по количеству жителей для конкретной страны
-        public async Task<List<City>> GetCitiesTopPopulation(int countryId, int top = 3)
-        {
-            return await _context.Cities
-                .Where(c => c.CountryId == countryId)
-                .OrderByDescending(c => c.Population)
-                .Take(top)
-                .ToListAsync();
-        }
-
         // показать общее количество стран
-        public async Task<int> GetCountCountries()
+        public async Task<int> GetCountCountriesAsync()
         {
             return await _context.Countries
                 .CountAsync();
         }
 
         // показать часть света с максимальным количеством стран
-        public async Task<PartsOfTheWorld> GetPartOfTheWorldWithMaxCountries()
+        public async Task<PartsOfTheWorld> GetPartOfTheWorldWithMaxCountriesAsync()
         {
             return await _context.Countries
-                .Select(c => c.PartOfTheWorld)
-                .MaxAsync();
+                .GroupBy(c => c.PartOfTheWorld)
+                .Select(p => new { Name = p.Key, Count = p.Count() })
+                .OrderByDescending(c => c.Count)
+                .Select(c => c.Name)
+                .FirstAsync();
         }
 
         // показаьть количество стран в каждой части света
+        public async Task<List<(PartsOfTheWorld, int)>> GetCountCountriesInPartOfTheWorldAsync()
+        {
+            var list = await _context.Countries
+                .GroupBy(c => c.PartOfTheWorld)
+                .Select(p => new { Name = p.Key, Count = p.Count() })
+                .ToListAsync();
+
+            return list.Select(r => (r.Name, r.Count)).ToList();
+        }
     }
 }

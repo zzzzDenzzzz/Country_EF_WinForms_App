@@ -8,8 +8,11 @@ namespace Country_EF_WinForms_App.Services
         public static void CreateForm(MethodKeys key, object sender)
         {
             var form = new QueryForm(key);
-            var button = sender as Button;
-            form.Text = button?.Text;
+            if (sender is not Button button)
+            {
+                return;
+            }
+            form.Text = button.Text;
             form.ShowDialog();
         }
     }
