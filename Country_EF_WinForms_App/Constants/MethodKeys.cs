@@ -7,5 +7,9 @@
         GetEuropianCountries,
         GetCapitalContainsLetter,
         GetCapitalStartWithLetter,
+        GetCountryTopArea,
+        GetCapitalTopPopulation,
+        GetCountryLargestArea,
+        GetCapitalLargestPopulation,
     }
 }

@@ -132,9 +132,10 @@
             // 
             // btnAdd
             // 
+            this.btnAdd.AutoSize = true;
             this.btnAdd.Location = new System.Drawing.Point(79, 142);
             this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(75, 23);
+            this.btnAdd.Size = new System.Drawing.Size(70, 25);
             this.btnAdd.TabIndex = 9;
             this.btnAdd.Text = "Добавить";
             this.btnAdd.UseVisualStyleBackColor = true;
@@ -142,10 +143,11 @@
             // 
             // btnCancel
             // 
+            this.btnCancel.AutoSize = true;
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(203, 142);
+            this.btnCancel.Location = new System.Drawing.Point(208, 142);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(75, 23);
+            this.btnCancel.Size = new System.Drawing.Size(70, 25);
             this.btnCancel.TabIndex = 10;
             this.btnCancel.Text = "Отменить";
             this.btnCancel.UseVisualStyleBackColor = true;
@@ -177,7 +179,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(302, 185);
+            this.ClientSize = new System.Drawing.Size(302, 170);
             this.Controls.Add(this.groupBoxIsCapital);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnAdd);

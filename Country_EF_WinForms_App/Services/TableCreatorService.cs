@@ -30,6 +30,29 @@ namespace Country_EF_WinForms_App.Services
             return table;
         }
 
+        public static DataTable CreateCountryTable(Country country)
+        {
+            DataTable table = new();
+            table.Clear();
+            table.Columns.Add("Id");
+            table.Columns.Add("Название");
+            table.Columns.Add("Площадь");
+            table.Columns.Add("Население");
+            table.Columns.Add("Часть света");
+            table.Columns.Add("Столица");
+
+            DataRow row = table.NewRow();
+            row[0] = country.Id;
+            row[1] = country.Name;
+            row[2] = country.Area;
+            row[3] = country.Population;
+            row[4] = country.PartOfTheWorld.GetEnumDescription();
+            row[5] = country.Cities.FirstOrDefault(x => x.IsCapital)?.Name;
+            table.Rows.Add(row);
+
+            return table;
+        }
+
         public static DataTable CreateCityTable(List<City> cities)
         {
             DataTable table = new();
@@ -48,6 +71,25 @@ namespace Country_EF_WinForms_App.Services
                 row[3] = city.Country.Name;
                 table.Rows.Add(row);
             }
+            return table;
+        }
+
+        public static DataTable CreateCityTable(City city)
+        {
+            DataTable table = new();
+            table.Clear();
+            table.Columns.Add("Id");
+            table.Columns.Add("Название");
+            table.Columns.Add("Население");
+            table.Columns.Add("Страна");
+
+            DataRow row = table.NewRow();
+            row[0] = city.Id;
+            row[1] = city.Name;
+            row[2] = city.Population;
+            row[3] = city.Country.Name;
+            table.Rows.Add(row);
+
             return table;
         }
 

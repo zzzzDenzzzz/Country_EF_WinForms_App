@@ -230,6 +230,26 @@ namespace Country_EF_WinForms_App
             FormHelperService.CreateForm(MethodKeys.GetCapitalStartWithLetter, sender);
         }
 
+        void BtnGetCountryTopArea_Click(object sender, EventArgs e)
+        {
+            FormHelperService.CreateForm(MethodKeys.GetCountryTopArea, sender);
+        }
+
+        void BtnGetCapitalTopPopulation_Click(object sender, EventArgs e)
+        {
+            FormHelperService.CreateForm(MethodKeys.GetCapitalTopPopulation, sender);
+        }
+
+        void BtnGetCountryLargestArea_Click(object sender, EventArgs e)
+        {
+            FormHelperService.CreateForm(MethodKeys.GetCountryLargestArea, sender);
+        }
+
+        void BtnGetCapitalLargestPopulation_Click(object sender, EventArgs e)
+        {
+            FormHelperService.CreateForm(MethodKeys.GetCapitalLargestPopulation, sender);
+        }
+
         #endregion
     }
 }

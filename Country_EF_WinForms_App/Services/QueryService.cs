@@ -101,7 +101,7 @@ namespace Country_EF_WinForms_App.Services
         }
 
         // показать топ-5 стран по площади
-        public async Task<List<Country>> GetCountryTopArea(int top = 5)
+        public async Task<List<Country>> GetCountryTopAreaAsync(int top = 5)
         {
             return await _context.Countries
                 .OrderByDescending(c => c.Area)
@@ -110,7 +110,7 @@ namespace Country_EF_WinForms_App.Services
         }
 
         // показать топ-5 столиц по количеству жителей
-        public async Task<List<City>> GetCapitalTopPopulation(int top = 5)
+        public async Task<List<City>> GetCapitalTopPopulationAsync(int top = 5)
         {
             return await _context.Cities
                 .Where(c => c.IsCapital == true)
@@ -120,7 +120,7 @@ namespace Country_EF_WinForms_App.Services
         }
 
         // показать страну с самой большой площадью
-        public async Task<Country> GetCountryLargestArea()
+        public async Task<Country> GetCountryLargestAreaAsync()
         {
             return await _context.Countries
                 .OrderByDescending(c => c.Area)
@@ -128,7 +128,7 @@ namespace Country_EF_WinForms_App.Services
         }
 
         // показать столицу с самым большим количеством жителей
-        public async Task<City> GetCapitalLargestPopulation()
+        public async Task<City> GetCapitalLargestPopulationAsync()
         {
             return await _context.Cities
                 .Where(c => c.IsCapital == true)

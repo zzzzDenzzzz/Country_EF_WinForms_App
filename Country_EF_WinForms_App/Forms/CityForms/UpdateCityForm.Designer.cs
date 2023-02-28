@@ -53,53 +53,48 @@
             // labelName
             // 
             this.labelName.AutoSize = true;
-            this.labelName.Location = new System.Drawing.Point(21, 10);
-            this.labelName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelName.Location = new System.Drawing.Point(18, 9);
             this.labelName.Name = "labelName";
-            this.labelName.Size = new System.Drawing.Size(59, 15);
+            this.labelName.Size = new System.Drawing.Size(55, 13);
             this.labelName.TabIndex = 0;
             this.labelName.Text = "Название";
             // 
             // txtName
             // 
-            this.txtName.Location = new System.Drawing.Point(92, 7);
-            this.txtName.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.txtName.Location = new System.Drawing.Point(79, 6);
             this.txtName.Name = "txtName";
-            this.txtName.Size = new System.Drawing.Size(231, 23);
+            this.txtName.Size = new System.Drawing.Size(199, 21);
             this.txtName.TabIndex = 1;
             this.txtName.Validating += new System.ComponentModel.CancelEventHandler(this.TxtName_Validating);
             // 
             // labelPopulation
             // 
             this.labelPopulation.AutoSize = true;
-            this.labelPopulation.Location = new System.Drawing.Point(14, 40);
-            this.labelPopulation.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelPopulation.Location = new System.Drawing.Point(12, 35);
             this.labelPopulation.Name = "labelPopulation";
-            this.labelPopulation.Size = new System.Drawing.Size(67, 15);
+            this.labelPopulation.Size = new System.Drawing.Size(61, 13);
             this.labelPopulation.TabIndex = 2;
             this.labelPopulation.Text = "Население";
             // 
             // numericPopulation
             // 
-            this.numericPopulation.Location = new System.Drawing.Point(92, 38);
-            this.numericPopulation.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.numericPopulation.Location = new System.Drawing.Point(79, 33);
             this.numericPopulation.Maximum = new decimal(new int[] {
             1410065408,
             2,
             0,
             0});
             this.numericPopulation.Name = "numericPopulation";
-            this.numericPopulation.Size = new System.Drawing.Size(232, 23);
+            this.numericPopulation.Size = new System.Drawing.Size(199, 21);
             this.numericPopulation.TabIndex = 3;
             this.numericPopulation.Validating += new System.ComponentModel.CancelEventHandler(this.NumericPopulation_Validating);
             // 
             // labelCountry
             // 
             this.labelCountry.AutoSize = true;
-            this.labelCountry.Location = new System.Drawing.Point(34, 73);
-            this.labelCountry.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelCountry.Location = new System.Drawing.Point(29, 63);
             this.labelCountry.Name = "labelCountry";
-            this.labelCountry.Size = new System.Drawing.Size(46, 15);
+            this.labelCountry.Size = new System.Drawing.Size(44, 13);
             this.labelCountry.TabIndex = 4;
             this.labelCountry.Text = "Страна";
             // 
@@ -107,20 +102,18 @@
             // 
             this.comboBoxCountry.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxCountry.FormattingEnabled = true;
-            this.comboBoxCountry.Location = new System.Drawing.Point(92, 69);
-            this.comboBoxCountry.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.comboBoxCountry.Location = new System.Drawing.Point(79, 60);
             this.comboBoxCountry.Name = "comboBoxCountry";
-            this.comboBoxCountry.Size = new System.Drawing.Size(231, 23);
+            this.comboBoxCountry.Size = new System.Drawing.Size(199, 21);
             this.comboBoxCountry.TabIndex = 5;
             this.comboBoxCountry.Validating += new System.ComponentModel.CancelEventHandler(this.ComboBoxCountry_Validating);
             // 
             // radioBtnYes
             // 
             this.radioBtnYes.AutoSize = true;
-            this.radioBtnYes.Location = new System.Drawing.Point(7, 23);
-            this.radioBtnYes.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.radioBtnYes.Location = new System.Drawing.Point(6, 20);
             this.radioBtnYes.Name = "radioBtnYes";
-            this.radioBtnYes.Size = new System.Drawing.Size(39, 19);
+            this.radioBtnYes.Size = new System.Drawing.Size(39, 17);
             this.radioBtnYes.TabIndex = 7;
             this.radioBtnYes.Text = "Да";
             this.radioBtnYes.UseVisualStyleBackColor = true;
@@ -129,10 +122,9 @@
             // 
             this.radioBtnNo.AutoSize = true;
             this.radioBtnNo.Checked = true;
-            this.radioBtnNo.Location = new System.Drawing.Point(59, 23);
-            this.radioBtnNo.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.radioBtnNo.Location = new System.Drawing.Point(51, 20);
             this.radioBtnNo.Name = "radioBtnNo";
-            this.radioBtnNo.Size = new System.Drawing.Size(45, 19);
+            this.radioBtnNo.Size = new System.Drawing.Size(44, 17);
             this.radioBtnNo.TabIndex = 8;
             this.radioBtnNo.TabStop = true;
             this.radioBtnNo.Text = "Нет";
@@ -140,10 +132,10 @@
             // 
             // btnUpdate
             // 
-            this.btnUpdate.Location = new System.Drawing.Point(92, 164);
-            this.btnUpdate.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.btnUpdate.AutoSize = true;
+            this.btnUpdate.Location = new System.Drawing.Point(79, 142);
             this.btnUpdate.Name = "btnUpdate";
-            this.btnUpdate.Size = new System.Drawing.Size(88, 27);
+            this.btnUpdate.Size = new System.Drawing.Size(70, 25);
             this.btnUpdate.TabIndex = 9;
             this.btnUpdate.Text = "Изменить";
             this.btnUpdate.UseVisualStyleBackColor = true;
@@ -151,11 +143,11 @@
             // 
             // btnCancel
             // 
+            this.btnCancel.AutoSize = true;
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(237, 164);
-            this.btnCancel.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.btnCancel.Location = new System.Drawing.Point(208, 142);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(88, 27);
+            this.btnCancel.Size = new System.Drawing.Size(70, 25);
             this.btnCancel.TabIndex = 10;
             this.btnCancel.Text = "Отменить";
             this.btnCancel.UseVisualStyleBackColor = true;
@@ -176,20 +168,18 @@
             // 
             this.groupBoxIsCapital.Controls.Add(this.radioBtnYes);
             this.groupBoxIsCapital.Controls.Add(this.radioBtnNo);
-            this.groupBoxIsCapital.Location = new System.Drawing.Point(92, 100);
-            this.groupBoxIsCapital.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.groupBoxIsCapital.Location = new System.Drawing.Point(79, 87);
             this.groupBoxIsCapital.Name = "groupBoxIsCapital";
-            this.groupBoxIsCapital.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.groupBoxIsCapital.Size = new System.Drawing.Size(232, 57);
+            this.groupBoxIsCapital.Size = new System.Drawing.Size(199, 49);
             this.groupBoxIsCapital.TabIndex = 11;
             this.groupBoxIsCapital.TabStop = false;
             this.groupBoxIsCapital.Text = "Является столицей";
             // 
             // UpdateCityForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(352, 213);
+            this.ClientSize = new System.Drawing.Size(292, 174);
             this.Controls.Add(this.groupBoxIsCapital);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnUpdate);
@@ -199,7 +189,6 @@
             this.Controls.Add(this.labelPopulation);
             this.Controls.Add(this.txtName);
             this.Controls.Add(this.labelName);
-            this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.Name = "UpdateCityForm";
             this.Text = "Изменение города";
             ((System.ComponentModel.ISupportInitialize)(this.numericPopulation)).EndInit();

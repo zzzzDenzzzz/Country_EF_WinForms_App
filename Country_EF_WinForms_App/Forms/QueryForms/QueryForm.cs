@@ -20,6 +20,10 @@ namespace Country_EF_WinForms_App.Forms
                 { MethodKeys.GetEuropianCountries, GetEuropianCountries },
                 { MethodKeys.GetCapitalContainsLetter, GetCapitalContainsLetter },
                 { MethodKeys.GetCapitalStartWithLetter, GetCapitalStartWithLetter },
+                { MethodKeys.GetCountryTopArea, GetCountryTopArea },
+                { MethodKeys.GetCapitalTopPopulation, GetCapitalTopPopulation },
+                { MethodKeys.GetCountryLargestArea, GetCountryLargestArea },
+                { MethodKeys.GetCapitalLargestPopulation, GetCapitalLargestPopulation },
             };
             LoadMethod[key]();
         }
@@ -57,6 +61,34 @@ namespace Country_EF_WinForms_App.Forms
             TableCreatorService.ShowTable(
                 gridQuery,
                 TableCreatorService.CreateCityTable(await _queryService.GetCapitalStartWithLetterAsync()));
+        }
+
+        async void GetCountryTopArea()
+        {
+            TableCreatorService.ShowTable(
+                gridQuery,
+                TableCreatorService.CreateCountryTable(await _queryService.GetCountryTopAreaAsync()));
+        }
+
+        async void GetCapitalTopPopulation()
+        {
+            TableCreatorService.ShowTable(
+                gridQuery,
+                TableCreatorService.CreateCityTable(await _queryService.GetCapitalTopPopulationAsync()));
+        }
+
+        async void GetCountryLargestArea()
+        {
+            TableCreatorService.ShowTable(
+                gridQuery,
+                TableCreatorService.CreateCountryTable(await _queryService.GetCountryLargestAreaAsync()));
+        }
+
+        async void GetCapitalLargestPopulation()
+        {
+            TableCreatorService.ShowTable(
+                gridQuery,
+                TableCreatorService.CreateCityTable(await _queryService.GetCapitalLargestPopulationAsync()));
         }
     }
 }
